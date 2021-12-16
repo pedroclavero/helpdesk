@@ -47,16 +47,16 @@ public class Chamado implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Chamado(Tecnico tecnico, Cliente cliente, Integer id, Prioridade prioridade, Status status, String titulo,
-			String observacoes) {
+	public Chamado(Integer id, Prioridade prioridade, Status status, String titulo, String observacoes, Tecnico tecnico,
+			Cliente cliente) {
 		super();
-		this.tecnico = tecnico;
-		this.cliente = cliente;
 		this.id = id;
 		this.prioridade = prioridade;
 		this.status = status;
 		this.titulo = titulo;
 		this.observacoes = observacoes;
+		this.tecnico = tecnico;
+		this.cliente = cliente;
 	}
 
 	public Tecnico getTecnico() {
