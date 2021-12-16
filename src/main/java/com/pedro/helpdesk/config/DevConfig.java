@@ -11,21 +11,20 @@ import com.pedro.helpdesk.services.DBService;
 @Configuration
 @Profile("dev")
 public class DevConfig {
-	
-	
+
 	@Autowired
 	private DBService dbService;
-	
+
 	@Value("${spring.jpa.hibernate.ddl-auto}")
 	private String value;
-	
+
 	@Bean
 	public boolean instanciaDB() {
-		
-		if(value.equals("crate")) {
+
+		if (value.equals("crate")) {
 			this.dbService.instanciaDB();
 		}
-		
+
 		return false;
 	}
 }

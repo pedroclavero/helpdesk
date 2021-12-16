@@ -15,34 +15,33 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.pedro.helpdesk.domain.enums.Prioridade;
 import com.pedro.helpdesk.domain.enums.Status;
 
-
 @Entity
-public class Chamado implements Serializable{
-	
+public class Chamado implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "tecnico_id")
 	private Tecnico tecnico;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataAbertura = LocalDate.now();
-	
+
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataFechamento;
 	private Prioridade prioridade;
 	private Status status;
 	private String titulo;
 	private String observacoes;
-	
+
 	public Chamado() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -148,8 +147,5 @@ public class Chamado implements Serializable{
 		Chamado other = (Chamado) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
-	
-	
+
 }

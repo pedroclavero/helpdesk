@@ -21,36 +21,32 @@ import com.pedro.helpdesk.domain.enums.Perfil;
 
 @Entity
 public abstract class Pessoa implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Integer id;
 	protected String nome;
-	
+
 	@Column(unique = true)
 	protected String cpf;
-	
+
 	@Column(unique = true)
 	protected String email;
 	protected String senha;
-	
-	
+
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "PERFIS")
 	protected Set<Integer> perfis = new HashSet<>();
-	
+
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	protected LocalDate dataCriacao = LocalDate.now();
-	
-	
+
 	public Pessoa() {
 		super();
 		addPerfis(Perfil.CLIENTE);
 	}
-
 
 	public Pessoa(Integer id, String nome, String cpf, String email, String senha) {
 		super();
@@ -62,78 +58,61 @@ public abstract class Pessoa implements Serializable {
 		addPerfis(Perfil.CLIENTE);
 	}
 
-
 	public Integer getId() {
 		return id;
 	}
-
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-
 	public String getNome() {
 		return nome;
 	}
-
 
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-
 	public String getCpf() {
 		return cpf;
 	}
-
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
-
 	public String getEmail() {
 		return email;
 	}
-
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-
 	public String getSenha() {
 		return senha;
 	}
-
 
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 
-
 	public Set<Perfil> getPerfis() {
-		return perfis.stream()
-				.map(x -> Perfil.toEnum(x))
-				.collect(Collectors.toSet());
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
 	}
-
 
 	public void addPerfis(Perfil perfil) {
 		this.perfis.add(perfil.getCod());
 	}
 
-
 	public LocalDate getDataCriacao() {
 		return dataCriacao;
 	}
 
-
 	public void setDataCriacao(LocalDate dataCriacao) {
 		this.dataCriacao = dataCriacao;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -151,5 +130,5 @@ public abstract class Pessoa implements Serializable {
 		Pessoa other = (Pessoa) obj;
 		return Objects.equals(cpf, other.cpf) && Objects.equals(id, other.id);
 	}
-		
+
 }

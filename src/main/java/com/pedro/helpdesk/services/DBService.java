@@ -15,19 +15,16 @@ import com.pedro.helpdesk.repositories.ChamadoRepository;
 import com.pedro.helpdesk.repositories.ClienteRepository;
 import com.pedro.helpdesk.repositories.TecnicoRepository;
 
-
-
 @Service
 public class DBService {
-	
+
 	@Autowired
 	private TecnicoRepository tecnicoRepository;
 	@Autowired
 	private ClienteRepository clienteRepository;
 	@Autowired
 	private ChamadoRepository chamadoRepository;
-	
-	
+
 	public void instanciaDB() {
 		Tecnico tec1 = new Tecnico(null, "Pedro Clavero", "08410512912", "pedroclavero@mail.com", "123");
 		tec1.addPerfis(Perfil.ADMIM);

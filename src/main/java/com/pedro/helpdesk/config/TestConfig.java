@@ -10,11 +10,10 @@ import com.pedro.helpdesk.services.DBService;
 @Configuration
 @Profile("test")
 public class TestConfig {
-	
-	
+
 	@Autowired
 	private DBService dbService;
-	
+
 	@Bean
 	public void instanciaDB() {
 		this.dbService.instanciaDB();
