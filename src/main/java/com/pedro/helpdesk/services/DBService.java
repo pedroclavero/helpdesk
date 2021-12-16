@@ -5,15 +5,15 @@ import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pedro.helpdesk.domain.Chamado;
-import com.pedro.helpdesk.domain.Cliente;
-import com.pedro.helpdesk.domain.Tecnico;
-import com.pedro.helpdesk.domain.enums.Perfil;
-import com.pedro.helpdesk.domain.enums.Prioridade;
-import com.pedro.helpdesk.domain.enums.Status;
-import com.pedro.helpdesk.repositories.ChamadoRepository;
-import com.pedro.helpdesk.repositories.ClienteRepository;
-import com.pedro.helpdesk.repositories.TecnicoRepository;
+import com.pedro.helpdesk.model.entities.Chamado;
+import com.pedro.helpdesk.model.entities.Cliente;
+import com.pedro.helpdesk.model.entities.Tecnico;
+import com.pedro.helpdesk.model.entities.enums.Perfil;
+import com.pedro.helpdesk.model.entities.enums.Prioridade;
+import com.pedro.helpdesk.model.entities.enums.Status;
+import com.pedro.helpdesk.model.repositories.ChamadoRepository;
+import com.pedro.helpdesk.model.repositories.ClienteRepository;
+import com.pedro.helpdesk.model.repositories.TecnicoRepository;
 
 @Service
 public class DBService {
