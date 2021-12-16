@@ -18,7 +18,8 @@ public class TecnicoController {
 	
 	@Autowired
 	private TecnicoService tecnicoService;
-	@GetMapping(name = "/{id}")
+	
+	@GetMapping(value = "/{id}")
 	public ResponseEntity<TecnicoDTO> findById(@PathVariable Integer id){ 
 		Tecnico obj = tecnicoService.findById(id);
 		return ResponseEntity.ok().body(new TecnicoDTO(obj));
