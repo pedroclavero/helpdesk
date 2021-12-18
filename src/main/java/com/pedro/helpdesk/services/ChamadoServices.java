@@ -1,5 +1,6 @@
 package com.pedro.helpdesk.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +41,13 @@ public class ChamadoServices {
 	public Chamado create(@Valid ChamadoDTO objDTO) {
 		return chamadoReposity.save(newChamado(objDTO));
 	}
+	
+	public Chamado update(Integer id, ChamadoDTO objDTO) {
+		objDTO.setId(id);
+		Chamado oldObj = findbyId(id);
+		oldObj = newChamado(objDTO);
+		return chamadoReposity.save(oldObj);
+	}
 
 	private Chamado newChamado(ChamadoDTO obj) {
 		Tecnico tecnico = tecnicoService.findById(obj.getTecnico());
@@ -48,6 +56,10 @@ public class ChamadoServices {
 		Chamado chamado = new Chamado();
 		if (obj.getId() != null) {
 			chamado.setId(obj.getId());
+		}
+		
+		if(obj.getStatus().equals(2)) {
+			chamado.setDataFechamento(LocalDate.now());
 		}
 
 		chamado.setTecnico(tecnico);
@@ -58,4 +70,6 @@ public class ChamadoServices {
 		chamado.setObservacoes(obj.getObservacoes());
 		return chamado;
 	}
+
+
 }
