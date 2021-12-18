@@ -47,14 +47,11 @@ public class TecnicoController {
 
 		return ResponseEntity.ok().body(listDTO);
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<TecnicoDTO> create(@RequestBody TecnicoDTO objDTO){
-			Tecnico newObj = tecnicoService.create(objDTO);
-			URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-												.path("/{id}")
-												.buildAndExpand(newObj.getId())
-												.toUri();
-			return ResponseEntity.created(uri).build();
+	public ResponseEntity<TecnicoDTO> create(@RequestBody TecnicoDTO objDTO) {
+		Tecnico newObj = tecnicoService.create(objDTO);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
+		return ResponseEntity.created(uri).build();
 	}
 }
