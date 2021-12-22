@@ -3,7 +3,7 @@ package com.pedro.helpdesk.model.entities.enums;
 public enum Perfil {
 	// Adicionando valores fixos nas enumerações
 
-	ADMIM(0, "ROLE_ADMIM"), CLIENTE(1, "ROLE_CLIENTE"), TECNICO(2, "ROLE_TECNICO");
+	ADMIN(0, "ROLE_ADMIN"), CLIENTE(1, "ROLE_CLIENTE"), TECNICO(2, "ROLE_TECNICO");
 
 	private Integer cod;
 	private String descricao;
