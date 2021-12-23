@@ -28,50 +28,41 @@ import com.pedro.helpdesk.services.TecnicoService;
 public class TecnicoController {
 
 	@Autowired
-	private TecnicoService tecnicoService;
+	private TecnicoService service;
 
-//	metodo implementado no curso
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<TecnicoDTO> findById(@PathVariable Integer id) {
-		Tecnico obj = tecnicoService.findById(id);
+		Tecnico obj = service.findById(id);
 		return ResponseEntity.ok().body(new TecnicoDTO(obj));
 	}
 
-// metodo implementado e modificado - Pedro Clavero
-//	@GetMapping
-//	public ResponseEntity<TecnicoDTO> findById(@RequestParam(name = "id") Integer id) {
-//		Tecnico obj = tecnicoService.findById(id);
-//		return ResponseEntity.ok().body(new TecnicoDTO(obj));
-//	}
-
 	@GetMapping
 	public ResponseEntity<List<TecnicoDTO>> findAll() {
-
-		List<Tecnico> list = tecnicoService.findAll();
-		List<TecnicoDTO> listDTO = list.stream().map(x -> new TecnicoDTO(x)).collect(Collectors.toList());
-
+		List<Tecnico> list = service.findAll();
+		List<TecnicoDTO> listDTO = list.stream().map(obj -> new TecnicoDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDTO);
 	}
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping
 	public ResponseEntity<TecnicoDTO> create(@Valid @RequestBody TecnicoDTO objDTO) {
-		Tecnico newObj = tecnicoService.create(objDTO);
+		Tecnico newObj = service.create(objDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
-
+	
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<TecnicoDTO> update(@PathVariable Integer id, @Valid @RequestBody TecnicoDTO objDTO) {
-		Tecnico oldObj = tecnicoService.update(id, objDTO);
-		return ResponseEntity.ok().body(new TecnicoDTO(oldObj));
+		Tecnico obj = service.update(id, objDTO);
+		return ResponseEntity.ok().body(new TecnicoDTO(obj));
 	}
-
+	
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<TecnicoDTO> delete(@PathVariable Integer id) {
-		tecnicoService.delete(id);
+		service.delete(id); 
 		return ResponseEntity.noContent().build();
 	}
+
 }

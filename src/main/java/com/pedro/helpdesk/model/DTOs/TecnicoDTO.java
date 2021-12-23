@@ -8,27 +8,25 @@ import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.pedro.helpdesk.model.entities.Tecnico;
 import com.pedro.helpdesk.model.entities.enums.Perfil;
 
 public class TecnicoDTO implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 
 	protected Integer id;
 	@NotNull(message = "O campo NOME é requerido")
 	protected String nome;
-
 	@NotNull(message = "O campo CPF é requerido")
+	@CPF
 	protected String cpf;
-
 	@NotNull(message = "O campo EMAIL é requerido")
 	protected String email;
-
 	@NotNull(message = "O campo SENHA é requerido")
 	protected String senha;
-
 	protected Set<Integer> perfis = new HashSet<>();
 
 	@JsonFormat(pattern = "dd/MM/yyyy")
@@ -46,7 +44,7 @@ public class TecnicoDTO implements Serializable {
 		this.cpf = obj.getCpf();
 		this.email = obj.getEmail();
 		this.senha = obj.getSenha();
-		this.perfis = obj.getPerfis().stream().map(x -> x.getCod()).collect(Collectors.toSet());
+		this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 		this.dataCriacao = obj.getDataCriacao();
 		addPerfil(Perfil.CLIENTE);
 	}
@@ -95,8 +93,8 @@ public class TecnicoDTO implements Serializable {
 		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
 	}
 
-	public void addPerfil(Perfil perfis) {
-		this.perfis.add(perfis.getCod());
+	public void addPerfil(Perfil perfil) {
+		this.perfis.add(perfil.getCodigo());
 	}
 
 	public LocalDate getDataCriacao() {

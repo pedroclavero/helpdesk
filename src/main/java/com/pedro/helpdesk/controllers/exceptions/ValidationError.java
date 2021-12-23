@@ -12,8 +12,8 @@ public class ValidationError extends StandardError {
 		super();
 	}
 
-	public ValidationError(Long timestamp, Integer status, String error, String massage, String path) {
-		super(timestamp, status, error, massage, path);
+	public ValidationError(Long timestamp, Integer status, String error, String message, String path) {
+		super(timestamp, status, error, message, path);
 	}
 
 	public List<FieldMessage> getErrors() {

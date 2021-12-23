@@ -8,20 +8,19 @@ public class StandardError implements Serializable {
 	private Long timestamp;
 	private Integer status;
 	private String error;
-	private String massage;
+	private String message;
 	private String path;
 
 	public StandardError() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public StandardError(Long timestamp, Integer status, String error, String massage, String path) {
+	public StandardError(Long timestamp, Integer status, String error, String message, String path) {
 		super();
 		this.timestamp = timestamp;
 		this.status = status;
 		this.error = error;
-		this.massage = massage;
+		this.message = message;
 		this.path = path;
 	}
 
@@ -49,12 +48,12 @@ public class StandardError implements Serializable {
 		this.error = error;
 	}
 
-	public String getMassage() {
-		return massage;
+	public String getMessage() {
+		return message;
 	}
 
-	public void setMassage(String massage) {
-		this.massage = massage;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	public String getPath() {

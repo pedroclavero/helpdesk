@@ -13,21 +13,20 @@ import com.pedro.helpdesk.model.entities.enums.Perfil;
 
 @Entity
 public class Cliente extends Pessoa {
-
 	private static final long serialVersionUID = 1L;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
-	private List<Chamado> chamados = new ArrayList<Chamado>();
+	private List<Chamado> chamados = new ArrayList<>();
 
 	public Cliente() {
 		super();
-		addPerfis(Perfil.CLIENTE);
+		addPerfil(Perfil.CLIENTE);
 	}
 
 	public Cliente(Integer id, String nome, String cpf, String email, String senha) {
 		super(id, nome, cpf, email, senha);
-		addPerfis(Perfil.CLIENTE);
+		addPerfil(Perfil.CLIENTE);
 	}
 
 	public Cliente(ClienteDTO obj) {
@@ -37,7 +36,7 @@ public class Cliente extends Pessoa {
 		this.cpf = obj.getCpf();
 		this.email = obj.getEmail();
 		this.senha = obj.getSenha();
-		this.perfis = obj.getPerfis().stream().map(x -> x.getCod()).collect(Collectors.toSet());
+		this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 		this.dataCriacao = obj.getDataCriacao();
 	}
 

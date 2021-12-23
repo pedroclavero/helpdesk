@@ -1,7 +1,6 @@
 package com.pedro.helpdesk.services.exceptions;
 
 public class ObjectnotFoundException extends RuntimeException {
-
 	private static final long serialVersionUID = 1L;
 
 	public ObjectnotFoundException(String message, Throwable cause) {
@@ -10,7 +9,6 @@ public class ObjectnotFoundException extends RuntimeException {
 
 	public ObjectnotFoundException(String message) {
 		super(message);
-
 	}
 
 }

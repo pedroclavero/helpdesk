@@ -1,42 +1,36 @@
 package com.pedro.helpdesk.model.entities.enums;
 
 public enum Perfil {
-	// Adicionando valores fixos nas enumerações
 
 	ADMIN(0, "ROLE_ADMIN"), CLIENTE(1, "ROLE_CLIENTE"), TECNICO(2, "ROLE_TECNICO");
-
-	private Integer cod;
+	
+	private Integer codigo;
 	private String descricao;
-
-	private Perfil(Integer cod, String descricao) {
-		this.cod = cod;
+	
+	private Perfil(Integer codigo, String descricao) {
+		this.codigo = codigo;
 		this.descricao = descricao;
+	}
+
+	public Integer getCodigo() {
+		return codigo;
 	}
 
 	public String getDescricao() {
 		return descricao;
 	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public Integer getCod() {
-		return cod;
-	}
-
+	
 	public static Perfil toEnum(Integer cod) {
-		if (cod == null) {
+		if(cod == null) {
 			return null;
 		}
-
-		for (Perfil x : Perfil.values()) {
-			if (cod.equals(x.getCod())) {
+		
+		for(Perfil x : Perfil.values()) {
+			if(cod.equals(x.getCodigo())) {
 				return x;
 			}
 		}
-
-		throw new IllegalArgumentException("Perfil Inválido");
+		
+		throw new IllegalArgumentException("Perfil inválido");
 	}
-
 }

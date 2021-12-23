@@ -21,54 +21,60 @@ import com.pedro.helpdesk.services.exceptions.ObjectnotFoundException;
 public class TecnicoService {
 
 	@Autowired
-	private TecnicoRepository tecnicoRepository;
+	private TecnicoRepository repository;
 	@Autowired
 	private PessoaRepository pessoaRepository;
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 
 	public Tecnico findById(Integer id) {
-		Optional<Tecnico> obj = tecnicoRepository.findById(id);
-		return obj.orElseThrow(() -> new ObjectnotFoundException("Objeto não encontrado!! Id: " + id));
+		Optional<Tecnico> obj = repository.findById(id);
+		return obj.orElseThrow(() -> new ObjectnotFoundException("Objeto não encontrado! Id: " + id));
 	}
 
 	public List<Tecnico> findAll() {
-		return tecnicoRepository.findAll();
+		return repository.findAll();
 	}
 
 	public Tecnico create(TecnicoDTO objDTO) {
 		objDTO.setId(null);
 		objDTO.setSenha(encoder.encode(objDTO.getSenha()));
-		validaPorCpfeEmail(objDTO);
+		validaPorCpfEEmail(objDTO);
 		Tecnico newObj = new Tecnico(objDTO);
-		return tecnicoRepository.save(newObj);
+		return repository.save(newObj);
 	}
-
+ 
 	public Tecnico update(Integer id, @Valid TecnicoDTO objDTO) {
 		objDTO.setId(id);
 		Tecnico oldObj = findById(id);
-		validaPorCpfeEmail(objDTO);
+		
+		if(!objDTO.getSenha().equals(oldObj.getSenha())) 
+			objDTO.setSenha(encoder.encode(objDTO.getSenha()));
+		
+		validaPorCpfEEmail(objDTO);
 		oldObj = new Tecnico(objDTO);
-		return tecnicoRepository.save(oldObj);
+		return repository.save(oldObj);
 	}
 
 	public void delete(Integer id) {
 		Tecnico obj = findById(id);
+
 		if (obj.getChamados().size() > 0) {
-			throw new DataIntegrityViolationException("Tecnico possui ordens de serviço e não pode ser deletado!!");
+			throw new DataIntegrityViolationException("Técnico possui ordens de serviço e não pode ser deletado!");
 		}
-		tecnicoRepository.deleteById(id);
+
+		repository.deleteById(id);
 	}
 
-	private void validaPorCpfeEmail(TecnicoDTO objDTO) {
+	private void validaPorCpfEEmail(TecnicoDTO objDTO) {
 		Optional<Pessoa> obj = pessoaRepository.findByCpf(objDTO.getCpf());
 		if (obj.isPresent() && obj.get().getId() != objDTO.getId()) {
-			throw new DataIntegrityViolationException("CPF já cadastrado no sistema!!");
+			throw new DataIntegrityViolationException("CPF já cadastrado no sistema!");
 		}
 
 		obj = pessoaRepository.findByEmail(objDTO.getEmail());
 		if (obj.isPresent() && obj.get().getId() != objDTO.getId()) {
-			throw new DataIntegrityViolationException("E-mail já cadastrado no sistema!!");
+			throw new DataIntegrityViolationException("E-mail já cadastrado no sistema!");
 		}
 	}
 
